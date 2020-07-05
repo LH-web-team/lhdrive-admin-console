@@ -4,7 +4,7 @@
       <v-col class="mx-10 my-5">
         <v-card class="pa-8">
           <v-row align="end cus-icon">
-            <v-btn class="ma-2 blue darken-4" dark width="80" height="80">
+            <v-btn class="mx-3 blue darken-4" dark>
               <v-icon dark>mdi-wrench</v-icon>
             </v-btn>
             <h1 class="" style="display:inline">學生選擇</h1>
@@ -107,7 +107,11 @@ table * {
 }
 .cus-icon {
   position: relative;
-  top: -65px;
-  margin-bottom: -50px;
+  top: -57px;
+  margin-bottom: -43px;
+}
+.cus-icon .v-btn {
+  width: 75px !important;
+  height: 75px !important;
 }
 </style>

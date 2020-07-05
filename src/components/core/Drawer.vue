@@ -2,7 +2,6 @@
   <v-navigation-drawer
     v-model="drawer"
     :color="color"
-    :mini-variant="miniVariant"
     src="@/assets/bg.png"
     dark
     app
@@ -10,7 +9,7 @@
     class="pa-1"
   >
     <v-list dense nav class="py-0">
-      <v-list-item two-line :class="miniVariant && 'px-0'">
+      <v-list-item two-line>
         <v-list-item-avatar>
           <img src="@/assets/lhdrive-icon.png" />
         </v-list-item-avatar>
@@ -66,7 +65,6 @@ export default {
       ],
       color: "dark",
       permanent: true,
-      miniVariant: false,
     };
   },
   computed: {},
