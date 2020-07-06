@@ -5,7 +5,7 @@
     src="@/assets/bg.png"
     dark
     app
-    width="300"
+    width="260"
     class="pa-1"
   >
     <v-list dense nav class="py-0">

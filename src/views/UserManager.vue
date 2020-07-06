@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="pa-0">
-    <v-row>
-      <v-col class="pa-12" cols="12" md="6" xl="5" id="leftWindow">
+    <v-row class="px-2 px-md-10">
+      <v-col class="py-12 px-6 " cols="12" md="6" lg="6" xl="5" id="leftWindow">
         <v-card class="pa-8 elevation-5">
           <v-row class="cus-icon" align="end">
             <v-btn class="mx-3 blue darken-4" dark>
@@ -55,7 +55,7 @@
           </div>
         </v-card>
       </v-col>
-      <v-col class="pa-12">
+      <v-col class="py-12 px-6" cols="12" md="6" lg="6" xl="7">
         <v-card class="pa-8 elevation-5">
           <v-row class="cus-icon" align="end">
             <v-btn class="mx-3 blue lighten" dark>
@@ -63,19 +63,29 @@
             </v-btn>
             <h1 class="" style="display:inline">操作記錄</h1>
             <v-spacer />
-            <h3 class="mr-4">更多...</h3>
+            <h3 class="mr-4 d-none d-sm-flex">更多...</h3>
           </v-row>
           <v-list flat>
             <v-list-item-group color="indigo">
               <v-list-item v-for="(record, i) in records" :key="i">
-                <v-row align="center">
-                  <v-list-item-icon>
-                    <v-icon v-text="record.icon"></v-icon>
-                  </v-list-item-icon>
-                  {{ record.text }}
-                  <v-spacer />
-                  {{ record.date }}
-                </v-row>
+                <v-list-item-icon>
+                  <v-icon v-text="record.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>
+                  <v-row no-gutters>
+                    <v-col style="text-overflow: ellipsis;  overflow:hidden">
+                      {{ record.text }}
+                    </v-col>
+                    <v-spacer class="d-none d-xl-flex" />
+                    <v-col cols="auto" class="d-none d-sm-flex">{{
+                      record.date
+                    }}</v-col>
+                  </v-row>
+                </v-list-item-title>
+                <!-- <v-list-item-title
+                  v-text="record.text"
+                  style="text-overflow: ellipsis;  overflow:hidden"
+                /> -->
               </v-list-item>
             </v-list-item-group>
           </v-list>
@@ -135,43 +145,44 @@ export default {
       records: [
         {
           icon: "mdi-download",
-          text: "張鎮揚下載了檔案ABCDEFB.ABCD",
-          date: "2020-07-06 04:00",
+          text: "下載了檔案ABCDEFB.ABCD",
+          date: "07-06 04:00",
         },
         {
           icon: "mdi-upload",
-          text: "張鎮揚上傳了檔案ABCDEFB.ABCD",
-          date: "2020-07-06 20:30",
+          text: "上傳了檔案ABCDEFB.ABCD",
+          date: "07-06 20:30",
         },
         {
           icon: "mdi-trash-can",
-          text: "張鎮揚刪除了檔案ABCDEFB.ABCD",
-          date: "2020-07-06 10:40",
+          text: "刪除了檔案ABCDEFB.ABCD",
+          date: "07-06 10:40",
         },
         {
           icon: "mdi-pencil",
-          text: "張鎮揚將檔案ABCDEF命名為ABCDEFB.ABCD",
-          date: "2020-07-06 00:00",
+          text: "將檔案ABCDEF命名為ABCDEFB.ABCD",
+          date: "07-06 00:00",
         },
         {
           icon: "mdi-download",
-          text: "張鎮揚下載了檔案ABCDEFB.ABCD",
-          date: "2020-07-06 04:00",
+          text: "下載了檔案ABCDEFB.ABCD",
+          date: "07-06 04:00",
         },
         {
           icon: "mdi-upload",
-          text: "張鎮揚上傳了檔案ABCDEFB.ABCD",
-          date: "2020-07-06 20:30",
+          text: "上傳了檔案ABCDEFB.ABCD",
+          date: "07-06 20:30",
         },
         {
           icon: "mdi-trash-can",
-          text: "張鎮揚刪除了檔案ABCDEFB.ABCD",
-          date: "2020-07-06 10:40",
+          text: "刪除了檔案ABCDEFB.ABCD",
+          date: "07-06 10:40",
         },
         {
           icon: "mdi-pencil",
-          text: "張鎮揚將檔案ABCDEF命名為ABCDEFB.ABCD",
-          date: "2020-07-06 00:00",
+          text:
+            "將檔案ABCDEF命名為ABfskasdkfa;lghioerngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirqumfhCDEFB.ABCD",
+          date: "07-06 00:00",
         },
       ],
     };
@@ -227,9 +238,9 @@ tr {
 .cus-icon > h3 {
   cursor: pointer;
 }
-@media screen and (min-width: 600px) {
+/* @media screen and (min-width: 600px) {
   #leftWindow {
     min-width: 600px;
   }
-}
+} */
 </style>
