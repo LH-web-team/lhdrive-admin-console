@@ -40,7 +40,7 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    <template v-slot:append v-if="!miniVariant">
+    <template v-slot:append>
       <div class="pa-2">
         <v-btn block color="grey darken-2">Logout</v-btn>
       </div>
