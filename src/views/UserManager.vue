@@ -1,20 +1,28 @@
 <template>
   <v-container fluid class="pa-0">
-    <v-row justify="center">
-      <v-col class="pa-12" cols="12" md="5" id="leftWindow">
+    <v-row>
+      <v-col class="pa-12" cols="12" md="6" xl="5" id="leftWindow">
         <v-card class="pa-8 elevation-5">
           <v-row class="cus-icon" align="end">
             <v-btn class="mx-3 blue darken-4" dark>
-              <v-icon dark>mdi-wrench</v-icon>
+              <v-icon large dark>mdi-wrench</v-icon>
             </v-btn>
             <h1 class="" style="display:inline">選擇學生</h1>
           </v-row>
           <v-row>
             <v-col cols="6">
-              <v-select label="級別" hide-details />
+              <v-select
+                v-model="selectedLevel"
+                :items="levelNames"
+                label="級別"
+              />
             </v-col>
             <v-col cols="6">
-              <v-select label="班別" hide-details />
+              <v-select
+                v-model="selectedClass"
+                :items="computedClassNames"
+                label="班別"
+              />
             </v-col>
             <v-col>
               <v-text-field
@@ -22,7 +30,6 @@
                 append-icon="mdi-magnify"
                 label="Search"
                 single-line
-                hide-details
                 placeholder="搜尋"
               ></v-text-field>
             </v-col>
@@ -33,24 +40,47 @@
             :items="items"
             :items-per-page="itemsPerPage"
             :search="search"
-            item-key="no"
-            single-select
-            hide-default-footer=""
+            hide-default-footer
             @page-count="pageCount = $event"
             :page.sync="page"
             class="px-md-4"
             @click:row="handleClick"
-          />
+          ></v-data-table>
           <div class="text-center py-4">
             <v-pagination
               v-model="page"
               :length="pageCount"
               :total-visible="8"
-            />
+            ></v-pagination>
           </div>
         </v-card>
       </v-col>
-      <v-col class="ma-10"> </v-col>
+      <v-col class="pa-12">
+        <v-card class="pa-8 elevation-5">
+          <v-row class="cus-icon" align="end">
+            <v-btn class="mx-3 blue lighten" dark>
+              <v-icon large dark>mdi-clock</v-icon>
+            </v-btn>
+            <h1 class="" style="display:inline">操作記錄</h1>
+            <v-spacer />
+            <h3 class="mr-4">更多...</h3>
+          </v-row>
+          <v-list flat>
+            <v-list-item-group color="indigo">
+              <v-list-item v-for="(record, i) in records" :key="i">
+                <v-row align="center">
+                  <v-list-item-icon>
+                    <v-icon v-text="record.icon"></v-icon>
+                  </v-list-item-icon>
+                  {{ record.text }}
+                  <v-spacer />
+                  {{ record.date }}
+                </v-row>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -63,13 +93,26 @@ export default {
     for (let i = 0; i < 1000; i++) {
       items.push({
         class: "初三乙",
-        name: "張鎮揚鎮場",
+        name: "張鎮揚_" + i,
         no: i,
         usedSpace: "5MB",
         studentno: "081079",
       });
     }
     return {
+      levelNames: ["全部", "初一", "初二", "初三", "高一", "高二", "高三"],
+      classNames: ["全部", "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛"],
+      selectedLevel: "全部",
+      selectedClass: "全部",
+      classNums: {
+        全部: 0,
+        初一: 5,
+        初二: 6,
+        初三: 6,
+        高一: 5,
+        高二: 6,
+        高三: 7,
+      },
       page: 1,
       pageCount: 0,
       items: items,
@@ -89,6 +132,48 @@ export default {
           value: "studentno",
         },
       ],
+      records: [
+        {
+          icon: "mdi-download",
+          text: "張鎮揚下載了檔案ABCDEFB.ABCD",
+          date: "2020-07-06 04:00",
+        },
+        {
+          icon: "mdi-upload",
+          text: "張鎮揚上傳了檔案ABCDEFB.ABCD",
+          date: "2020-07-06 20:30",
+        },
+        {
+          icon: "mdi-trash-can",
+          text: "張鎮揚刪除了檔案ABCDEFB.ABCD",
+          date: "2020-07-06 10:40",
+        },
+        {
+          icon: "mdi-pencil",
+          text: "張鎮揚將檔案ABCDEF命名為ABCDEFB.ABCD",
+          date: "2020-07-06 00:00",
+        },
+        {
+          icon: "mdi-download",
+          text: "張鎮揚下載了檔案ABCDEFB.ABCD",
+          date: "2020-07-06 04:00",
+        },
+        {
+          icon: "mdi-upload",
+          text: "張鎮揚上傳了檔案ABCDEFB.ABCD",
+          date: "2020-07-06 20:30",
+        },
+        {
+          icon: "mdi-trash-can",
+          text: "張鎮揚刪除了檔案ABCDEFB.ABCD",
+          date: "2020-07-06 10:40",
+        },
+        {
+          icon: "mdi-pencil",
+          text: "張鎮揚將檔案ABCDEF命名為ABCDEFB.ABCD",
+          date: "2020-07-06 00:00",
+        },
+      ],
     };
   },
   computed: {
@@ -96,6 +181,9 @@ export default {
       return this.headers.filter(
         (h) => !h.hide || !this.$vuetify.breakpoint[h.hide]
       );
+    },
+    computedClassNames() {
+      return this.classNames.slice(0, this.classNums[this.selectedLevel] + 1);
     },
   },
   methods: {
@@ -105,9 +193,12 @@ export default {
     updateTable() {
       let rowHeight = document.getElementsByTagName("tbody")[0].offsetHeight;
       let left =
-        window.innerHeight - document.getElementById("leftWindow").offsetHeight;
+        window.innerHeight -
+        document.getElementsByClassName("v-card")[0].offsetHeight -
+        48 * 2;
       let rows = left / rowHeight + 1;
       this.itemsPerPage = parseInt(rows);
+      console.debug(rows);
     },
   },
 
@@ -132,5 +223,13 @@ tr {
 .cus-icon .v-btn {
   width: 75px !important;
   height: 75px !important;
+}
+.cus-icon > h3 {
+  cursor: pointer;
+}
+@media screen and (min-width: 600px) {
+  #leftWindow {
+    min-width: 600px;
+  }
 }
 </style>
