@@ -5,8 +5,9 @@
     app
     width="260"
     class="pa-1"
-    :miniVariant="!smAndDown && $store.state.miniVariant"
-    :expand-on-hover="!smAndDown && $store.state.miniVariant"
+    :miniVariant="smAndDown ? false : $store.state.miniVariant"
+    :expand-on-hover="smAndDown ? false : $store.state.miniVariant"
+    v-model="$store.state.drawer"
     mini-variant-width="80"
   >
     <v-list dense nav class="py-0">
@@ -37,7 +38,7 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    <template v-slot:append v-if="!(!smAndDown && $store.state.miniVariant)">
+    <template v-slot:append v-if="smAndDown ? true : !$store.state.miniVariant">
       <div class="pa-2">
         <v-btn block color="grey darken-2">Logout</v-btn>
       </div>
@@ -61,9 +62,6 @@ export default {
     };
   },
   computed: {
-    xlAndUp() {
-      return this.$vuetify.breakpoint.xl;
-    },
     smAndDown() {
       return this.$vuetify.breakpoint.smAndDown;
     }

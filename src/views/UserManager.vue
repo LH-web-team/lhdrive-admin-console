@@ -202,8 +202,7 @@ export default {
         },
         {
           icon: "mdi-pencil",
-          text:
-            "將檔案ABCDEF命名為ABfskasdkfa;lghioerngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirrngihpoqerniohqgophrnvioqnopemoirqumfhCDEFB.ABCD",
+          text: "將檔案ABCDEF命名為B.ABCD",
           date: "07-06 00:00"
         }
       ]
@@ -253,6 +252,9 @@ export default {
     window.onresize = (() => {
       this.updateTable();
     }).bind(this);
+  },
+  beforeDestroy() {
+    window.onresize = null;
   }
 };
 </script>
