@@ -17,7 +17,7 @@ export default new Router({
           component: () => import("@/views/Dashboard"),
         },
         {
-          name: "UserManager",
+          name: "User Manager",
           path: "/UserManager",
           component: () => import("@/views/UserManager"),
         },

@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <core-drawer />
+    <core-app-bar />
     <core-view />
   </v-app>
 </template>
@@ -12,10 +13,7 @@ export default {
   components: {
     CoreDrawer: () => import("@/components/core/Drawer"),
     CoreView: () => import("@/components/core/View"),
-  },
-
-  data: () => ({
-    expandOnHover: false,
-  }),
+    CoreAppBar: () => import("@/components/core/AppBar")
+  }
 };
 </script>

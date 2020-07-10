@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: "DashboardCoreView",
+  name: "CoreView"
 };
 </script>
