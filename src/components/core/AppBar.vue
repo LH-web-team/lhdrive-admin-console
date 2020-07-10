@@ -10,7 +10,7 @@
     />
     <v-spacer class="hidden-sm-and-down" />
     <v-toolbar-title
-      v-if="$store.state.selectedUser"
+      v-if="$store.state.selectedUser && $route.path=='/UserManager'"
       class="font-weight-bold"
     >已選擇{{$store.state.selectedUser.name}}同學</v-toolbar-title>
     <div class="mx-4" />

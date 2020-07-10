@@ -52,7 +52,7 @@
       </v-col>
       <v-col cols="12" md="6" lg="6" xl="7" id="rightWindow">
         <v-container
-          v-if="!selectedItem"
+          v-if="!$store.state.selectedUser"
           class="d-flex justify-center align-center"
           style="height:100%"
         >
@@ -148,7 +148,6 @@ export default {
       pageCount: 0,
       items: items,
       itemsPerPage: 1,
-      selectedItem: null,
       search: "",
       headers: [
         {
